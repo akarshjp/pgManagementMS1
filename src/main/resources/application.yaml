@@ -1,0 +1,9 @@
+spring:
+  datasource:
+    url: jdbc:mysql://localhost:3306/pg_management_ms1
+    username: root
+    password: muriyakkat
+
+  jpa:
+    hibernate:
+      ddl-auto: validate
