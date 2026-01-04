@@ -1,7 +1,11 @@
 package com.pg.MS1.auth.dto;
 
+import jakarta.validation.constraints.NotBlank;
+
 public class LoginRequest {
+    @NotBlank
     private String email;
+    @NotBlank
     private String password;
     // getters & setters
     public String getEmail() {
