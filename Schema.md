@@ -54,7 +54,6 @@ id BIGINT PRIMARY KEY AUTO_INCREMENT,
     purpose VARCHAR(255),
     vehicle_number VARCHAR(20),
 
-    verified_by BIGINT NOT NULL,   -- ALWAYS the resident
     status ENUM('ACTIVE', 'EXITED', 'DENIED') NOT NULL,
 
     entry_time TIMESTAMP,
@@ -62,14 +61,15 @@ id BIGINT PRIMARY KEY AUTO_INCREMENT,
 
     notes TEXT,
 
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    updated_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        ON UPDATE CURRENT_TIMESTAMP,
+
     CONSTRAINT fk_access_resident
         FOREIGN KEY (resident_id) REFERENCES users(id),
 
     CONSTRAINT fk_access_pin
-        FOREIGN KEY (pin_id) REFERENCES resident_pins(id),
-
-    CONSTRAINT fk_access_verified_by
-        FOREIGN KEY (verified_by) REFERENCES users(id)
+        FOREIGN KEY (pin_id) REFERENCES resident_pins(id)
 );
 
 CREATE TABLE amenities (

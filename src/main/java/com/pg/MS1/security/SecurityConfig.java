@@ -30,7 +30,12 @@ public class SecurityConfig {
 
                 //TODO: Allow Swagger when swagger integrated, and only allow service endpoints
                 .authorizeHttpRequests(auth -> auth
-                        .requestMatchers("/auth/**").permitAll()
+                        .requestMatchers(
+                                "/auth/**",
+                                "/v3/api-docs/**",
+                                "/swagger-ui/**",
+                                "/swagger-ui.html")
+                        .permitAll()
                         .anyRequest().permitAll()
                 )
                 .addFilterBefore(

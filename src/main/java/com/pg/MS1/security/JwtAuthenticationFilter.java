@@ -1,6 +1,7 @@
 package com.pg.MS1.security;
 
 import com.pg.MS1.auth.service.JwtService;
+import io.jsonwebtoken.Claims;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
