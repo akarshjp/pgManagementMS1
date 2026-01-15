@@ -6,10 +6,10 @@ import java.time.Instant;
 
 public class CreatePinRequest {
 
-    private String pin;              // raw pin entered by resident
-    private PinType pinType;          // GUEST / DELIVERY
-    private Instant expiresAt;        // optional
-    private int maxUses = 1;          // default 1
+    private String pin;
+    private PinType pinType;
+    private Instant expiresAt;
+    private int maxUses = 1;
 
     public String getPin() {
         return pin;
