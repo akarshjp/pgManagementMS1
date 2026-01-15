@@ -83,4 +83,20 @@ public class AccessService {
 
         return accessLogRepository.save(log);
     }
+
+    @Transactional
+    public void exitAccess(Long residentId, Long accessId) {
+
+        AccessLog log = accessLogRepository
+                .findByIdAndResidentId(accessId, residentId)
+                .orElseThrow(() -> new RuntimeException("Access not found"));
+
+        if (log.getStatus() != AccessStatus.ACTIVE) {
+            throw new RuntimeException("Access is not active");
+        }
+
+        log.setStatus(AccessStatus.EXITED);
+        log.setExitTime(Instant.now());
+    }
+
 }

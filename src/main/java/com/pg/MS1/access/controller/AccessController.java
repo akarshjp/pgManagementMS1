@@ -7,10 +7,7 @@ import com.pg.MS1.access.service.AccessService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/access")
@@ -38,4 +35,19 @@ public class AccessController {
                 new VerifyPinResponse(log.getResident().getId(), log.getStatus().name())
         );
     }
+
+    @PreAuthorize("hasRole('RESIDENT')")
+    @PatchMapping("/{accessId}/exit")
+    public ResponseEntity<Void> exitAccess(@PathVariable Long accessId) {
+
+        Long residentId = (Long) SecurityContextHolder
+                .getContext()
+                .getAuthentication()
+                .getPrincipal();
+
+        accessService.exitAccess(residentId, accessId);
+
+        return ResponseEntity.ok().build();
+    }
+
 }
